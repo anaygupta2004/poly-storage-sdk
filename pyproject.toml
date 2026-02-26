@@ -1,0 +1,34 @@
+[build-system]
+requires = ["hatchling>=1.26.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "poly-storage-sdk"
+version = "0.1.0"
+description = "Official Python SDK for the Entity Market Data API."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.9"
+authors = [
+  { name = "EntityML" }
+]
+dependencies = [
+  "requests>=2.31.0",
+]
+keywords = ["entityml", "polymarket", "kalshi", "sdk", "api"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Development Status :: 4 - Beta",
+]
+
+[project.urls]
+Homepage = "https://entityml.com"
+Documentation = "https://entityml.com/documentation"
+Repository = "https://github.com/agov12/poly-storage"
+Issues = "https://github.com/agov12/poly-storage/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["poly_storage_sdk"]

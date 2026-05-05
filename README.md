@@ -36,6 +36,21 @@ kalshi_data = client.kalshi.get_market_data(
 )
 ```
 
+## CLI
+
+The CLI ships in the same package:
+
+```bash
+export ENTITY_API_KEY="YOUR_API_KEY"
+
+entityml health
+entityml polymarket market-data \
+  --condition-id 0x0008043c3ed513ecff7ee64380fc943dc73eb3dfb6674f281149efe4769f7515 \
+  --date 2026-02-13
+```
+
+The legacy `poly-storage` command is still installed as a compatibility alias.
+
 ## Endpoint groups
 
 - `client.polymarket`: list markets, date ranges, daily data, timestamp ranges, and orderbook summaries.

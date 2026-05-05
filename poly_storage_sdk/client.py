@@ -395,7 +395,7 @@ class PolyStorageClient:
         self.session.headers.update(
             {
                 "Accept": "application/json",
-                "User-Agent": "entityml-sdk/0.2.0",
+                "User-Agent": "entityml/0.3.0",
             }
         )
         if self.api_key:

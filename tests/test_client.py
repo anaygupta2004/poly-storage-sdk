@@ -78,6 +78,39 @@ class ClientTests(unittest.TestCase):
         )
         self.assertEqual(self.last_call["params"]["cursor"], "next")
 
+    def test_orderbook_summary_accepts_timestamp_window(self):
+        self.client.polymarket.get_orderbook_summary(
+            condition_id="0xabc",
+            asset_id="token-1",
+            start_timestamp=1775000000000,
+            end_timestamp=1775000060000,
+        )
+        self.assertEqual(
+            self.last_call["params"],
+            {
+                "condition_id": "0xabc",
+                "asset_id": "token-1",
+                "start_timestamp": 1775000000000,
+                "end_timestamp": 1775000060000,
+                "resolution": 60,
+            },
+        )
+
+        self.client.kalshi.get_orderbook_summary(
+            ticker="KXBTC-TEST",
+            start_timestamp=1775000000000,
+            end_timestamp=1775000060000,
+        )
+        self.assertEqual(
+            self.last_call["params"],
+            {
+                "ticker": "KXBTC-TEST",
+                "start_timestamp": 1775000000000,
+                "end_timestamp": 1775000060000,
+                "resolution": 60,
+            },
+        )
+
     def test_inventory_and_date_range_methods(self):
         self.client.polymarket.list_markets(prefix="0xabc", offset=10, limit=5)
         self.assertEqual(self.last_call["url"], "https://api.entityml.com/api/v1/polymarket/market/list")

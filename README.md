@@ -27,7 +27,8 @@ data = client.polymarket.get_market_data(
 summary = client.polymarket.get_orderbook_summary(
     condition_id="0x0008043c3ed513ecff7ee64380fc943dc73eb3dfb6674f281149efe4769f7515",
     asset_id="97684905927345553455494278582909124912046930226695064344571162061840768197777",
-    date="2026-02-13",
+    start_timestamp=1770940800000,
+    end_timestamp=1770944399999,
     resolution=60,
 )
 kalshi_data = client.kalshi.get_market_data(

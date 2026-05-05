@@ -202,7 +202,9 @@ class PolymarketService(_BaseService):
         *,
         condition_id: str,
         asset_id: str,
-        date: str,
+        date: Optional[str] = None,
+        start_timestamp: Optional[int] = None,
+        end_timestamp: Optional[int] = None,
         resolution: int = 60,
     ) -> Dict[str, Any]:
         return self._request(
@@ -212,6 +214,8 @@ class PolymarketService(_BaseService):
                 "condition_id": condition_id,
                 "asset_id": asset_id,
                 "date": date,
+                "start_timestamp": start_timestamp,
+                "end_timestamp": end_timestamp,
                 "resolution": resolution,
             },
             requires_auth=True,
@@ -287,7 +291,9 @@ class KalshiService(_BaseService):
         self,
         *,
         ticker: str,
-        date: str,
+        date: Optional[str] = None,
+        start_timestamp: Optional[int] = None,
+        end_timestamp: Optional[int] = None,
         resolution: int = 60,
     ) -> Dict[str, Any]:
         return self._request(
@@ -296,6 +302,8 @@ class KalshiService(_BaseService):
             params={
                 "ticker": ticker,
                 "date": date,
+                "start_timestamp": start_timestamp,
+                "end_timestamp": end_timestamp,
                 "resolution": resolution,
             },
             requires_auth=True,
@@ -395,7 +403,7 @@ class PolyStorageClient:
         self.session.headers.update(
             {
                 "Accept": "application/json",
-                "User-Agent": "entityml/0.3.0",
+                "User-Agent": "entityml/0.3.1",
             }
         )
         if self.api_key:

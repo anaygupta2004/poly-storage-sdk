@@ -69,7 +69,9 @@ def _build_parser() -> argparse.ArgumentParser:
     )
     poly_summary.add_argument("--condition-id", required=True)
     poly_summary.add_argument("--asset-id", required=True)
-    poly_summary.add_argument("--date", required=True)
+    poly_summary.add_argument("--date")
+    poly_summary.add_argument("--start-timestamp", type=int)
+    poly_summary.add_argument("--end-timestamp", type=int)
     poly_summary.add_argument("--resolution", type=int, default=60)
 
     kalshi = commands.add_parser("kalshi", help="Kalshi endpoints")
@@ -108,7 +110,9 @@ def _build_parser() -> argparse.ArgumentParser:
         "orderbook-summary", help="Fetch kalshi orderbook summary"
     )
     kalshi_summary.add_argument("--ticker", required=True)
-    kalshi_summary.add_argument("--date", required=True)
+    kalshi_summary.add_argument("--date")
+    kalshi_summary.add_argument("--start-timestamp", type=int)
+    kalshi_summary.add_argument("--end-timestamp", type=int)
     kalshi_summary.add_argument("--resolution", type=int, default=60)
 
     api_keys = commands.add_parser("api-keys", help="API key management")
@@ -230,11 +234,16 @@ def _execute(client: EntityMLClient, args: argparse.Namespace) -> Dict[str, Any]
                 limit=args.limit,
             )
         if args.subcommand == "orderbook-summary":
+            params = {
+                "condition_id": args.condition_id,
+                "asset_id": args.asset_id,
+                "date": args.date,
+                "start_timestamp": args.start_timestamp,
+                "end_timestamp": args.end_timestamp,
+                "resolution": args.resolution,
+            }
             return client.polymarket.get_orderbook_summary(
-                condition_id=args.condition_id,
-                asset_id=args.asset_id,
-                date=args.date,
-                resolution=args.resolution,
+                **{key: value for key, value in params.items() if value is not None}
             )
 
     if args.command == "kalshi":
@@ -262,10 +271,15 @@ def _execute(client: EntityMLClient, args: argparse.Namespace) -> Dict[str, Any]
                 limit=args.limit,
             )
         if args.subcommand == "orderbook-summary":
+            params = {
+                "ticker": args.ticker,
+                "date": args.date,
+                "start_timestamp": args.start_timestamp,
+                "end_timestamp": args.end_timestamp,
+                "resolution": args.resolution,
+            }
             return client.kalshi.get_orderbook_summary(
-                ticker=args.ticker,
-                date=args.date,
-                resolution=args.resolution,
+                **{key: value for key, value in params.items() if value is not None}
             )
 
     if args.command == "api-keys":

@@ -82,6 +82,36 @@ class CLITests(unittest.TestCase):
         )
 
     @patch("entityml.cli.EntityMLClient")
+    def test_polymarket_orderbook_summary_accepts_timestamp_window(self, client_cls):
+        client = client_cls.return_value
+        client.polymarket.get_orderbook_summary = Mock(return_value={"data_points": 1})
+
+        with redirect_stdout(io.StringIO()):
+            code = main(
+                [
+                    "polymarket",
+                    "orderbook-summary",
+                    "--condition-id",
+                    "0xabc",
+                    "--asset-id",
+                    "token-1",
+                    "--start-timestamp",
+                    "1775000000000",
+                    "--end-timestamp",
+                    "1775000060000",
+                ]
+            )
+
+        self.assertEqual(code, 0)
+        client.polymarket.get_orderbook_summary.assert_called_once_with(
+            condition_id="0xabc",
+            asset_id="token-1",
+            start_timestamp=1775000000000,
+            end_timestamp=1775000060000,
+            resolution=60,
+        )
+
+    @patch("entityml.cli.EntityMLClient")
     def test_range_lookup_billing_and_analytics_commands(self, client_cls):
         client = client_cls.return_value
         client.kalshi.get_market_data_range = Mock(return_value={"data_count": 0})

@@ -1,5 +1,6 @@
 import unittest
 
+from entityml import EntityMLClient
 from poly_storage_sdk import PolyStorageClient
 
 
@@ -27,7 +28,7 @@ class FakeSession:
 class ClientTests(unittest.TestCase):
     def setUp(self):
         self.session = FakeSession()
-        self.client = PolyStorageClient(
+        self.client = EntityMLClient(
             api_key="test-key",
             base_url="https://api.entityml.com",
             session=self.session,
@@ -38,6 +39,8 @@ class ClientTests(unittest.TestCase):
         return self.session.calls[-1]
 
     def test_polymarket_orderbook_summary_sends_asset_id(self):
+        self.assertIsInstance(self.client, PolyStorageClient)
+
         self.client.polymarket.get_orderbook_summary(
             condition_id="0xabc",
             asset_id="token-1",

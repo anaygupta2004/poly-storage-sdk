@@ -1,19 +1,19 @@
-# poly-storage-sdk
+# entityml
 
-Official Python SDK for the Entity Market Data API.
+Official Python SDK for the EntityML Market Data API.
 
 ## Install
 
 ```bash
-pip install poly-storage-sdk
+pip install entityml
 ```
 
 ## Usage
 
 ```python
-from poly_storage_sdk import PolyStorageClient
+from entityml import EntityMLClient
 
-client = PolyStorageClient(api_key="YOUR_API_KEY")
+client = EntityMLClient(api_key="YOUR_API_KEY")
 
 health = client.system.health()
 markets = client.polymarket.list_markets(prefix="0x8213", limit=10)

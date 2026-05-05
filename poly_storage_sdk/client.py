@@ -395,7 +395,7 @@ class PolyStorageClient:
         self.session.headers.update(
             {
                 "Accept": "application/json",
-                "User-Agent": "poly-storage-sdk/0.2.0",
+                "User-Agent": "entityml-sdk/0.2.0",
             }
         )
         if self.api_key:
@@ -408,3 +408,7 @@ class PolyStorageClient:
         self.kalshi = KalshiService(self)
         self.billing = BillingService(self)
         self.analytics = AnalyticsService(self)
+
+
+class EntityMLClient(PolyStorageClient):
+    """Preferred client name for the EntityML Market Data API."""

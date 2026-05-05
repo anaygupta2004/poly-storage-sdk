@@ -1,10 +1,11 @@
-from .client import EntityMLClient, PolyStorageClient
-from .errors import (
+from poly_storage_sdk import (
     EntityMLAPIError,
     EntityMLAuthError,
+    EntityMLClient,
     EntityMLError,
     PolyStorageAPIError,
     PolyStorageAuthError,
+    PolyStorageClient,
     PolyStorageError,
 )
 

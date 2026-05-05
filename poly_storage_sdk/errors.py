@@ -26,3 +26,8 @@ class PolyStorageAPIError(PolyStorageError):
 
 class PolyStorageAuthError(PolyStorageAPIError):
     """Raised for authentication and authorization failures."""
+
+
+EntityMLError = PolyStorageError
+EntityMLAPIError = PolyStorageAPIError
+EntityMLAuthError = PolyStorageAuthError

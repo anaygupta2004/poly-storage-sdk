@@ -3,9 +3,9 @@ requires = ["hatchling>=1.26.0"]
 build-backend = "hatchling.build"
 
 [project]
-name = "poly-storage-sdk"
+name = "entityml"
 version = "0.2.0"
-description = "Official Python SDK for the Entity Market Data API."
+description = "Official Python SDK for the EntityML Market Data API."
 readme = "README.md"
 license = { text = "MIT" }
 requires-python = ">=3.9"
@@ -31,4 +31,4 @@ Repository = "https://github.com/agov12/poly-storage"
 Issues = "https://github.com/agov12/poly-storage/issues"
 
 [tool.hatch.build.targets.wheel]
-packages = ["poly_storage_sdk"]
+packages = ["entityml", "poly_storage_sdk"]
